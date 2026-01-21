@@ -1,0 +1,32 @@
+# Ambiente virtuale
+.env/
+venv/
+env/
+
+# Directory dati
+data/
+DATA/
+
+# File di output generati
+clean_*.xlsx
+modifiche_effettuate_*.txt
+errori.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

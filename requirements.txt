@@ -1,0 +1,9 @@
+# Librerie core
+openpyxl>=3.1.2
+
+# Per creare l'eseguibile Windows
+pyinstaller>=6.0.0
+
+# Note: tkinter è incluso nella distribuzione standard di Python
+# Su Linux, potrebbe essere necessario installare: python3-tk
+# Su Windows e macOS è già incluso
