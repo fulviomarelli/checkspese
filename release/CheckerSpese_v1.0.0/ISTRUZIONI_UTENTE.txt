@@ -1,0 +1,123 @@
+═══════════════════════════════════════════════════════════════════════════════
+  CHECKER SPESE - Istruzioni per l'uso
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 COSA FA QUESTO PROGRAMMA?
+
+Il Checker Spese è un bot automatico che pulisce e valida i dati delle spese
+da file Excel, correggendo errori comuni e segnalando anomalie.
+
+
+🚀 COME UTILIZZARLO?
+
+Opzione A - CON ESEGUIBILE (Più semplice):
+─────────────────────────────────────────
+1. Copia il file "CheckerSpese.exe" nella cartella con i tuoi file Excel
+2. Doppio click su "CheckerSpese.exe"
+3. Fine! I file di output verranno creati automaticamente
+
+
+Opzione B - CON SCRIPT BAT (Alternativa):
+──────────────────────────────────────────
+1. Copia "Esegui_CheckerSpese.bat" e "checker_spese.py" nella cartella
+   con i tuoi file Excel
+2. Doppio click su "Esegui_CheckerSpese.bat"
+3. Il sistema controllerà automaticamente Python e le dipendenze
+4. Se tutto è ok, il programma partirà
+
+
+Opzione C - MANUALE (Esperti):
+───────────────────────────────
+1. Installa Python 3.7+ (https://www.python.org/downloads/)
+2. Apri il terminale nella cartella del programma
+3. Esegui: pip install -r requirements.txt
+4. Esegui: python checker_spese.py
+
+
+📁 STRUTTURA FILE
+
+Prima dell'esecuzione:
+  📂 Cartella di lavoro
+  ├── CheckerSpese.exe (o .bat + .py)
+  └── PE_004 MICS.xlsx  ← Il tuo file da processare
+
+Dopo l'esecuzione:
+  📂 Cartella di lavoro
+  ├── CheckerSpese.exe
+  ├── PE_004 MICS.xlsx
+  ├── clean_PE_004 MICS.xlsx              ← File pulito ✓
+  ├── modifiche_effettuate_PE_004 MICS.txt ← Log modifiche
+  └── errori.xlsx                          ← Errori trovati (se presenti)
+
+
+🔍 FILE DI OUTPUT
+
+1. clean_[nome_file].xlsx
+   → File Excel pulito con tutti i dati corretti
+
+2. modifiche_effettuate_[nome_file].txt
+   → Log dettagliato di tutte le modifiche effettuate con timestamp
+
+3. errori.xlsx (solo se necessario)
+   → Righe che non hanno superato i controlli di validazione
+
+
+⚙️ REQUISITI SISTEMA
+
+Windows 7/10/11 (64-bit)
+- Con eseguibile: nessun requisito (standalone)
+- Con Python: Python 3.7+ con tkinter
+
+
+🔄 PROCESSO DI PULIZIA
+
+Il programma esegue automaticamente 5 fasi:
+
+FASE 1: Eliminazione spese non POLIMI
+  → Rimuove righe dove il campo "Soggetto" non contiene "POLIMI"
+
+FASE 2: Filtraggio per stato
+  → Mantiene solo righe con stato "Trasmessa" o "Conclusa in attesa..."
+
+FASE 3: Eliminazione costi indiretti
+  → Rimuove righe con "Tipologia spesa" = "Costi indiretti"
+
+FASE 4: Pulizia dipartimenti ⚠️ (Interattiva)
+  → Corregge errori nei nomi dei dipartimenti
+  → Potrebbe mostrare una finestra per confermare correzioni
+
+FASE 5: Validazione rendicontazione ⚠️ (Interattiva)
+  → Verifica coerenza tra tipo spesa, inquadramento e rendicontazione
+  → Potrebbe mostrare una finestra con errori trovati
+
+
+⚠️ NOTE IMPORTANTI
+
+• Il file originale NON viene mai modificato
+• Durante le fasi 4 e 5 potrebbero apparire finestre per confermare correzioni
+• Tutti i cambiamenti sono tracciati nel file di log
+• Il processo può durare alcuni secondi/minuti a seconda della dimensione del file
+
+
+❓ PROBLEMI COMUNI
+
+Errore "Python non installato":
+  → Scarica Python da https://www.python.org/downloads/
+  → Durante l'installazione: seleziona "Add Python to PATH"
+
+Errore "tkinter non disponibile":
+  → Durante installazione Python: seleziona "tcl/tk and IDLE"
+  → In alternativa: usa l'eseguibile CheckerSpese.exe
+
+Il programma non trova il file Excel:
+  → Assicurati che il file sia .xlsx o .xlsm
+  → Deve essere nella stessa cartella dell'eseguibile
+
+
+📧 SUPPORTO
+
+Per problemi o domande contattare l'amministratore di sistema.
+
+
+═══════════════════════════════════════════════════════════════════════════════
+Versione 1.0 - Gennaio 2026

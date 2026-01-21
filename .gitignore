@@ -19,6 +19,11 @@ __pycache__/
 *.so
 .Python
 
+prepare_release.sh
+GUIDA_RELEASE_GITHUB.md
+
+/prepare_release.sh
+/GUIDA_RELEASE_GITHUB.md
 
 # IDE
 .vscode/
