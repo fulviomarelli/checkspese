@@ -1,4 +1,4 @@
-name: Build Release
+name: Create Release
 
 on:
   push:
@@ -6,53 +6,7 @@ on:
       - 'v*'  # Trigger su tag tipo v1.0.0
 
 jobs:
-  build-windows:
-    runs-on: windows-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install pyinstaller
-
-    - name: Build executable
-      run: |
-        pyinstaller --onefile --windowed --name CheckerSpese checker_spese.py
-
-    - name: Prepare release package
-      run: |
-        mkdir release
-        mkdir release/CheckerSpese
-        copy dist\CheckerSpese.exe release\CheckerSpese\
-        copy Esegui_CheckerSpese.bat release\CheckerSpese\
-        copy ISTRUZIONI_UTENTE.txt release\CheckerSpese\
-        copy README.md release\CheckerSpese\
-        copy checker_spese.py release\CheckerSpese\
-        copy requirements.txt release\CheckerSpese\
-        echo ${{ github.ref_name }} > release\CheckerSpese\VERSION.txt
-
-    - name: Create ZIP archive
-      run: |
-        cd release
-        Compress-Archive -Path CheckerSpese -DestinationPath CheckerSpese_${{ github.ref_name }}.zip
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: CheckerSpese-Windows
-        path: release/CheckerSpese_${{ github.ref_name }}.zip
-
   create-release:
-    needs: build-windows
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -61,15 +15,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Download artifact
-      uses: actions/download-artifact@v4
-      with:
-        name: CheckerSpese-Windows
-
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
-        files: CheckerSpese_${{ github.ref_name }}.zip
+        files: release/CheckerSpese_${{ github.ref_name }}.zip
         body: |
           # CheckerSpese ${{ github.ref_name }}
 

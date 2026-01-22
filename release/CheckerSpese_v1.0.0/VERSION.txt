@@ -1,2 +1,2 @@
 CheckerSpese v1.0.0
-Data rilascio: 2026-01-21
+Data rilascio: 2026-01-22
